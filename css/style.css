@@ -21,7 +21,9 @@ body, html {
 }
 
 .logo {
-  width: 120px;
+  width: 20%;        /* scales with screen size */
+  max-width: 220px;  /* never bigger than 220px */
+  min-width: 120px;  /* never smaller than 120px */
   margin-bottom: 20px;
 }
 
