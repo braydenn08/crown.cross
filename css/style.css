@@ -1,14 +1,13 @@
-/* Reset */
 body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'Georgia', serif;
+  font-family: 'Cinzel Decorative', serif;
 }
 
 /* Welcome Page */
 .welcome-page {
-  background: linear-gradient(to right, #000000, #333333);
+  background: linear-gradient(to right, #000000, #1a1a1a);
   color: white;
   height: 100vh;
   display: flex;
@@ -17,20 +16,25 @@ body, html {
   text-align: center;
 }
 
+.welcome-content {
+  animation: fadeIn 2s ease-in-out;
+}
+
 .welcome-content h1 {
-  font-size: 3rem;
+  font-size: 4rem;
   margin-bottom: 0.5rem;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
 }
 
 .welcome-content p {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin-bottom: 2rem;
   font-style: italic;
+  color: #ddd;
 }
 
 .shop-btn {
-  padding: 12px 30px;
+  padding: 14px 36px;
   font-size: 1.2rem;
   background: white;
   color: black;
@@ -43,6 +47,11 @@ body, html {
 .shop-btn:hover {
   background: gold;
   color: black;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 
