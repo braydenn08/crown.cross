@@ -4,16 +4,80 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crown & Cross</title>
-  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      font-family: serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #222;
+    }
+    header {
+      background: #111;
+      padding: 15px;
+      text-align: center;
+    }
+    header nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    header nav a:hover {
+      text-decoration: underline;
+    }
+    .welcome {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 90vh;
+      text-align: center;
+      padding: 20px;
+    }
+    .welcome img {
+      max-width: 200px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+    .welcome h1 {
+      font-size: 2.5rem;
+      margin: 10px 0;
+    }
+    .welcome p {
+      font-size: 1.2rem;
+      margin: 10px 0 20px;
+      font-style: italic;
+    }
+    .welcome a {
+      display: inline-block;
+      padding: 12px 25px;
+      background: #111;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+    }
+    .welcome a:hover {
+      background: #444;
+    }
+  </style>
 </head>
 <body>
-  <div class="welcome-page">
-    <div class="welcome-content">
-      <img src="assets/images/logo.png" alt="Crown & Cross Logo" class="logo">
-      <h1>Crown & Cross</h1>
-      <p>Wear Faith in Style</p>
-      <a href="shop.html" class="shop-btn">Enter Shop</a>
-    </div>
-  </div>
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="welcome">
+    <img src="assets/images/logo.png" alt="Crown & Cross Logo">
+    <h1>Welcome to Crown & Cross</h1>
+    <p>Wear Faith in Style.</p>
+    <a href="shop.html">Shop Now</a>
+  </section>
 </body>
 </html>
