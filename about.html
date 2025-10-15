@@ -1,79 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — Crown & Cross</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About &mdash; Crown & Cross</title>
   <style>
     body {
-      font-family: serif;
       margin: 0;
       padding: 0;
-      background: #f9f9f9;
-      color: #222;
-    }
-    header {
+      font-family: serif;
       background: #111;
-      padding: 15px;
+      color: #fff;
+      overflow: hidden;
+    }
+    .slider {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+    .slide {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-    }
-    header nav a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    header nav a:hover {
-      text-decoration: underline;
-    }
-    .about {
-      max-width: 900px;
-      margin: 50px auto;
       padding: 20px;
+      box-sizing: border-box;
+    }
+    .slide.active {
+      display: flex;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .slide h2 {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+    .slide p {
+      font-size: 1.2rem;
+      max-width: 700px;
       line-height: 1.6;
     }
-    .about h1 {
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .dots {
+      position: absolute;
+      bottom: 30px;
+      width: 100%;
       text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 20px;
     }
-    .about img {
-      display: block;
-      margin: 20px auto;
-      max-width: 200px;
+    .dot {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #888;
+      margin: 0 6px;
+      cursor: pointer;
+      transition: background 0.3s;
     }
-    .about p {
-      margin-bottom: 20px;
-    }
-    .quote {
-      text-align: center;
-      font-style: italic;
-      color: #555;
-      margin-top: 20px;
+    .dot.active {
+      background: #fff;
     }
   </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="shop.html">Shop</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
+  <div class="slider">
+    <div class="slide active">
+      <div>
+        <h2>Our Origin</h2>
+        <p>
+          Crown & Cross began as an idea from <strong>Brayden Robert Asare</strong>, who wanted to create more than just clothing — he wanted to create a brand that carried both faith and style.
+        </p>
+      </div>
+    </div>
 
-  <section class="about">
-    <h1>About Crown & Cross</h1>
-    <img src="assets/images/logo.png" alt="Crown & Cross Logo">
+    <div class="slide">
+      <div>
+        <h2>The Team</h2>
+        <p>
+          The vision grew into a team effort, as <strong>Judemunah Asamoah</strong>, <strong>Stephanie Faye Ankrah</strong>, <strong>Nyhira Odame</strong>, and <strong>Eric Kudichar</strong> joined to bring the dream to life.
+        </p>
+        <p>
+          Later, we added <strong>David Owusu Ansah</strong> as a designer — bringing creativity and a fresh touch to our growing brand.
+        </p>
+      </div>
+    </div>
 
-    <p>Crown & Cross began as an idea from <strong>Brayden Robert Asare</strong>, who wanted to create more than just clothing—he wanted to create a brand that carried both faith and style. Soon after, the vision grew into a team effort, as <strong>Judemunah Asamoah</strong>, <strong>Stephanie Faye Ankrah</strong>, and <strong>Nyhira Odame</strong> joined to bring the dream to life.</p>
+    <div class="slide">
+      <div>
+        <h2>Meaning Behind the Name</h2>
+        <p>
+          The name <strong>Crown & Cross</strong> was chosen to represent the powerful symbols of Jesus — the crown of victory and the cross of sacrifice. Our brand blends modern streetwear with timeless faith.
+        </p>
+      </div>
+    </div>
 
-    <p>The name <strong>Crown & Cross</strong> was chosen to represent the powerful symbols of Jesus—the crown of victory and the cross of sacrifice. Our brand is rooted in Christian fashion, blending modern streetwear with timeless faith, so that every piece carries meaning and sparks conversations.</p>
+    <div class="slide">
+      <div>
+        <h2>Our Belief</h2>
+        <p>
+          We believe that what you wear should reflect who you are. With Crown & Cross, you’re not just wearing clothes — you’re wearing a statement of faith, hope, and purpose.
+        </p>
+        <p><em>“Wear Faith in Style.”</em></p>
+      </div>
+    </div>
+  </div>
 
-    <p>We believe that what you wear should reflect who you are. With Crown & Cross, you’re not just wearing clothes—you’re wearing a statement of faith, hope, and purpose.</p>
+  <div class="dots">
+    <span class="dot active" onclick="goToSlide(0)"></span>
+    <span class="dot" onclick="goToSlide(1)"></span>
+    <span class="dot" onclick="goToSlide(2)"></span>
+    <span class="dot" onclick="goToSlide(3)"></span>
+  </div>
 
-    <p class="quote">“Wear Faith in Style.”</p>
-  </section>
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    let current = 0;
+
+    function showSlide(n) {
+      slides.forEach((s, i) => {
+        s.classList.remove('active');
+        dots[i].classList.remove('active');
+        if (i === n) {
+          s.classList.add('active');
+          dots[i].classList.add('active');
+        }
+      });
+      current = n;
+    }
+
+    function nextSlide() {
+      let next = current + 1;
+      if (next >= slides.length) next = 0;
+      showSlide(next);
+    }
+
+    function goToSlide(n) {
+      showSlide(n);
+      resetTimer();
+    }
+
+    let slideTimer = setInterval(nextSlide, 5000);
+    function resetTimer() {
+      clearInterval(slideTimer);
+      slideTimer = setInterval(nextSlide, 5000);
+    }
+  </script>
 </body>
 </html>
