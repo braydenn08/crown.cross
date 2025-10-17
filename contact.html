@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Crown & Cross</title>
+  <style>
+    body {
+      font-family: serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+    header {
+      background: #111;
+      padding: 15px;
+      text-align: center;
+    }
+    header nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    header nav a:hover {
+      text-decoration: underline;
+    }
+    .contact {
+      max-width: 600px;
+      margin: 80px auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .contact h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #111;
+    }
+    form label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    form textarea {
+      resize: vertical;
+    }
+    button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: #111;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      margin-top: 15px;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #333;
+    }
+    .socials {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 0.95rem;
+    }
+    .socials a {
+      color: #111;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .socials a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="contact">
+    <h2>Contact Crown & Cross</h2>
+    <form name="contact" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="contact">
+      
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email Address (optional)</label>
+      <input type="email" id="email" name="email">
+
+      <label for="whatsapp">WhatsApp Number (optional)</label>
+      <input type="tel" id="whatsapp" name="whatsapp" placeholder="+233 50 123 4567">
+
+      <label for="topic">Topic</label>
+      <select id="topic" name="topic" required>
+        <option value="">-- Select a Topic --</option>
+        <option value="order">Order Issue</option>
+        <option value="collaboration">Collaboration Request</option>
+        <option value="custom">Custom Design</option>
+        <option value="general">General Question</option>
+      </select>
+
+      <label for="message">Your Message</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+
+    <div class="socials">
+      <p>Or message us directly:</p>
+      <a href="https://www.instagram.com/crown_9196/" target="_blank">Instagram: @crown_9196</a>
+    </div>
+  </section>
+</body>
+</html>
