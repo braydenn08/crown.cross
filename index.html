@@ -9,11 +9,11 @@
       font-family: serif;
       margin: 0;
       padding: 0;
-      background: #f9f9f9;
-      color: #222;
+      background: #111; /* darker background for contrast */
+      color: #fff;
     }
     header {
-      background: #111;
+      background: #000;
       padding: 15px;
       text-align: center;
     }
@@ -34,7 +34,6 @@
       height: 90vh;
       text-align: center;
       padding: 20px;
-      background-color: #000; /* Assuming your background is dark */
     }
     .welcome img {
       max-width: 200px;
@@ -44,19 +43,18 @@
     .welcome h1 {
       font-size: 2.5rem;
       margin: 10px 0;
-      color: white;
     }
     .welcome p {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       margin: 10px 0 20px;
       font-style: italic;
-      color: white; /* changed to white */
+      color: #fff; /* white text */
     }
     .welcome a {
       display: inline-block;
       padding: 12px 25px;
-      background: white; /* changed to white */
-      color: black; /* changed to black */
+      background: #fff;
+      color: #000; /* black text */
       text-decoration: none;
       border-radius: 5px;
       font-size: 1.1rem;
@@ -64,7 +62,20 @@
       transition: 0.3s;
     }
     .welcome a:hover {
-      background: #ddd;
+      background: #ccc;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #aaa;
+      margin: 40px 0 10px;
+    }
+    footer a {
+      color: #aaa;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -77,19 +88,20 @@
       <a href="contact.html">Contact</a>
     </nav>
   </header>
+
   <section class="welcome">
     <img src="assets/images/logo.png" alt="Crown & Cross Logo">
     <h1>Welcome to Crown & Cross</h1>
     <p>Wear Faith in Style.</p>
     <a href="shop.html">Shop Now</a>
-    <footer>
-<footer>
-  <p style="text-align:center; font-size:0.9rem; color:#666; margin-top:50px;">
-    &copy; 2025 Crown & Cross | 
-    <a href="terms.html" style="color:#666; text-decoration:none;">Terms of Service</a> | 
-    <a href="refund.html" style="color:#666; text-decoration:none;">Refund Policy</a>
-  </p>
-</footer>
   </section>
+
+  <footer>
+    <p>
+      &copy; 2025 Crown & Cross | 
+      <a href="terms.html">Terms of Service</a> | 
+      <a href="refund.html">Refund Policy</a>
+    </p>
+  </footer>
 </body>
 </html>
