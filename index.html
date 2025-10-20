@@ -5,40 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crown & Cross</title>
   <style>
-    /* === COLOR PALETTE ===
-       Cream: #FAF9EE
-       Sage Green: #A2AF9B
-       Beige: #DCCFC0
-       Light Gray: #EEEEEE
-       Dark Text: #222
-    */
-
     body {
-      font-family: serif;
+      font-family: 'Merriweather', serif;
       margin: 0;
       padding: 0;
-      background: #FAF9EE;
-      color: #222;
+      background: #ffffff;
+      color: #111111;
     }
 
-    /* Header / Navbar */
+    /* Navbar */
     header {
-      background: #A2AF9B;
-      padding: 15px;
+      background: #000;
+      color: #fff;
+      padding: 15px 0;
       text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    header nav a {
-      color: white;
+    nav a {
+      color: #fff;
       margin: 0 15px;
       text-decoration: none;
-      font-weight: bold;
-      font-size: 1.1rem;
-      transition: color 0.3s;
+      font-weight: 700;
+      letter-spacing: 0.5px;
     }
 
-    header nav a:hover {
-      color: #DCCFC0;
+    nav a:hover {
+      color: #d4af37;
     }
 
     /* Welcome Section */
@@ -50,64 +45,61 @@
       height: 90vh;
       text-align: center;
       padding: 20px;
-      background: #FAF9EE;
+      background: #fff;
     }
 
     .welcome img {
       max-width: 200px;
-      height: auto;
       margin-bottom: 20px;
     }
 
     .welcome h1 {
-      font-size: 2.8rem;
+      font-size: 3rem;
       margin: 10px 0;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
 
     .welcome p {
-      font-size: 1.2rem;
-      margin: 10px 0 25px;
+      font-size: 1.25rem;
+      margin-bottom: 25px;
       font-style: italic;
-      color: white;
-      background-color: #A2AF9B;
-      padding: 8px 15px;
-      border-radius: 5px;
+      color: #000; /* Wear Faith in Style text is black */
     }
 
     .welcome a {
       display: inline-block;
       padding: 12px 30px;
-      background: #A2AF9B;
-      color: black;
+      background: #000;
+      color: #fff; /* Button text is white */
       text-decoration: none;
-      border-radius: 8px;
-      font-size: 1.1rem;
-      transition: background 0.3s, color 0.3s;
+      font-weight: bold;
+      border-radius: 6px;
+      transition: 0.3s;
     }
 
     .welcome a:hover {
-      background: #DCCFC0;
-      color: #222;
+      background: #333;
+      transform: scale(1.05);
     }
 
-    /* Footer / Terms area */
+    /* Footer */
     footer {
+      background: #f4f4f4;
+      color: #555;
       text-align: center;
-      padding: 20px;
-      background: #EEEEEE;
+      padding: 15px;
       font-size: 0.9rem;
     }
 
     footer a {
-      color: #222;
+      color: #000;
       text-decoration: none;
-      margin: 0 10px;
     }
 
     footer a:hover {
       text-decoration: underline;
     }
-
   </style>
 </head>
 <body>
@@ -122,14 +114,13 @@
 
   <section class="welcome">
     <img src="assets/images/logo.png" alt="Crown & Cross Logo">
-    <h1>Welcome to Crown & Cross</h1>
+    <h1>Crown & Cross</h1>
     <p>Wear Faith in Style.</p>
     <a href="shop.html">Shop Now</a>
   </section>
 
   <footer>
-    <a href="terms.html">Terms of Service</a> |
-    <a href="refund.html">Refund Policy</a>
+    <p>© 2025 Crown & Cross — <a href="terms.html">Terms of Service</a> | <a href="refund.html">Refund Policy</a></p>
   </footer>
 </body>
 </html>
