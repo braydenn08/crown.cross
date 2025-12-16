@@ -195,11 +195,38 @@
       button.classList.add('active');
       selectedSize = button.innerText;
     }
+
+
+  // keep your flow
+  window.location.href = `checkout.html?product=Holy&price=150&size=${selectedSize}`;
+}
 async function goToCheckout() {
   if (!selectedSize) {
     alert("Please select a size first");
     return;
   }
+
+  const order = {
+    product: "Holy",
+    size: selectedSize,
+    price: 150,
+    status: "new",
+    created_at: new Date().toISOString()
+  };
+
+  const { error } = await supabaseClient
+    .from("orders")
+    .insert([order]);
+
+  if (error) {
+    console.error(error);
+    alert("Order failed ❌");
+    return;
+  }
+
+  // ✅ WhatsApp REMOVED
+  alert("Order placed successfully ✅\nWe will contact you shortly.");
+}
 
   const order = {
     product: "Holy",
