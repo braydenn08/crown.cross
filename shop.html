@@ -139,12 +139,12 @@
 
     <div class="product">
 
-      <!-- SLIDESHOW -->
+      <!-- SLIDESHOW (DESIGN UNCHANGED) -->
       <div class="slideshow">
-        <img src="assets/images/IMG_0163.JPG" class="slide active">
-        <img src="assets/images/IMG_0173.JPG" class="slide">
-        <img src="assets/images/IMG_0203.JPG" class="slide">
-        <img src="assets/images/IMG_0164.JPG" class="slide">
+        <img src="assets/images/IMG_0163.JPG" class="slide active" alt="Holy Shirt Front">
+        <img src="assets/images/IMG_0173.JPG" class="slide" alt="Holy Shirt Back">
+        <img src="assets/images/IMG_0203.JPG" class="slide" alt="Holy Shirt Alt View">
+        <img src="assets/images/IMG_0164.JPG" class="slide" alt="Holy Shirt Side View">
 
         <div class="dots">
           <span class="dot active" onclick="showSlide(0)"></span>
@@ -154,7 +154,7 @@
         </div>
       </div>
 
-      <!-- INFO -->
+      <!-- INFO (DESIGN UNCHANGED) -->
       <div class="info">
         <h1>Holy</h1>
         <p class="price">GHS 150</p>
@@ -171,65 +171,39 @@
           </div>
         </div>
 
-        <button class="checkout-btn" onclick="placeOrder()">Checkout</button>
+        <button class="checkout-btn" onclick="goToCheckout()">Checkout</button>
       </div>
 
     </div>
   </div>
 
-  <!-- SUPABASE -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
   <script>
-    const supabaseClient = supabase.createClient(
-      "https://bwskekkwpisnsezcppvu.supabase.co",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3c2tla2t3cGlzbnNlemNwcHZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU4Nzc5NTAsImV4cCI6MjA4MTQ1Mzk1MH0.kjiIKinCihLVY59qCg-vM2Di9G9_aUZOTIgDw4ovyow"
-    );
-
-    const slides = document.querySelectorAll(".slide");
-    const dots = document.querySelectorAll(".dot");
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
     let selectedSize = null;
 
     function showSlide(index) {
       slides.forEach((slide, i) => {
-        slide.classList.toggle("active", i === index);
-        dots[i].classList.toggle("active", i === index);
+        slide.classList.toggle('active', i === index);
+        dots[i].classList.toggle('active', i === index);
       });
     }
 
     function selectSize(button) {
-      document.querySelectorAll(".size-options button")
-        .forEach(btn => btn.classList.remove("active"));
-      button.classList.add("active");
+      document.querySelectorAll('.size-options button')
+        .forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
       selectedSize = button.innerText;
     }
 
-    async function placeOrder() {
+    function goToCheckout() {
       if (!selectedSize) {
-        alert("Please select a size first");
+        alert('Please select a size first');
         return;
       }
 
-      const order = {
-        product: "Holy",
-        size: selectedSize,
-        price: 150,
-        status: "new"
-      };
-
-      const { error } = await supabaseClient
-        .from("orders")
-        .insert([order]);
-
-      if (error) {
-        console.error(error);
-        alert("Order failed ❌");
-      } else {
-        alert("Order placed successfully ✅");
-      }
+      window.location.href = `checkout.html?product=Holy&price=150&size=${selectedSize}`;
     }
   </script>
-
 </body>
 </html>
-
