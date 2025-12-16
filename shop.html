@@ -195,15 +195,34 @@
       button.classList.add('active');
       selectedSize = button.innerText;
     }
+async function goToCheckout() {
+  if (!selectedSize) {
+    alert("Please select a size first");
+    return;
+  }
 
-    function goToCheckout() {
-      if (!selectedSize) {
-        alert('Please select a size first');
-        return;
-      }
+  const order = {
+    product: "Holy",
+    size: selectedSize,
+    price: 150,
+    status: "new",
+    created_at: new Date().toISOString()
+  };
 
-      window.location.href = `checkout.html?product=Holy&price=150&size=${selectedSize}`;
-    }
+  const { error } = await supabaseClient
+    .from("orders")
+    .insert([order]);
+
+  if (error) {
+    console.error(error);
+    alert("Order failed ❌");
+    return;
+  }
+
+  // OPTIONAL: keep checkout page
+  window.location.href = `checkout.html?product=Holy&price=150&size=${selectedSize}`;
+}
+
   </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -213,7 +232,6 @@
   );
 </script>
   <script>
-async function placeOrder() {
   const order = {
     customer_name: document.getElementById("customer-name").value,
     product: document.getElementById("product").value,
@@ -237,11 +255,11 @@ async function placeOrder() {
 </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  const supabase = supabase.createClient(
+  const supabaseClient = supabase.createClient(
     "https://bwskekkwpisnsezcppvu.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3c2tla2t3cGlzbnNlemNwcHZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU4Nzc5NTAsImV4cCI6MjA4MTQ1Mzk1MH0.kjiIKinCihLVY59qCg-vM2Di9G9_aUZOTIgDw4ovyow
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3c2tla2t3cGlzbnNlemNwcHZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU4Nzc5NTAsImV4cCI6MjA4MTQ1Mzk1MH0.kjiIKinCihLVY59qCg-vM2Di9G9_aUZOTIgDw4ovyow"
   );
 </script>
-\
+
 </body>
 </html>
