@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop — Crown & Cross</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  color: #111;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: white;
+}
+
+.navbar img {
+  height: 40px;
+}
+
+.navbar a {
+  margin-left: 25px;
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+}
+
+/* SHOP */
+.shop {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.sub {
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: gray;
+}
+
+.title {
+  font-size: 48px;
+  margin: 10px 0;
+}
+
+.desc {
+  color: #666;
+  max-width: 500px;
+  margin: 0 auto 40px;
+}
+
+/* GRID */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  padding: 0 40px;
+}
+
+/* CARD */
+.card {
+  text-align: left;
+}
+
+/* IMAGE FIX (IMPORTANT) */
+.img-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #eaeaea;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* BADGE */
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: black;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+/* TEXT */
+.card h3 {
+  margin: 15px 0 5px;
+}
+
+.price {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 12px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #333;
+}
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <img src="assets/images/logo.png" alt="logo">
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<section class="shop">
+  <p class="sub">NEW COLLECTION</p>
+  <h1 class="title">NEW DROPS</h1>
+  <p class="desc">Faith-driven designs. Clean. Bold. Different.</p>
+
+  <div class="products">
+
+    <!-- PRODUCT -->
+    <div class="card">
+      <div class="img-box">
+        <span class="badge">NEW</span>
+        <img src="assets/images/IMG_0163.JPG" alt="Holy Shirt">
+      </div>
+      <h3>HOLY TEE</h3>
+      <p class="price">250 CEDIS</p>
+      <button onclick="goToProduct()">VIEW PRODUCT →</button>
+    </div>
+
+  </div>
+</section>
+
+<script>
+function goToProduct() {
+  window.location.href = "product.html"; 
+}
+</script>
+
+</body>
+</html>
