@@ -55,14 +55,47 @@
       z-index: 50;
     }
 
-    .nav-back { text-decoration: none; color: var(--text-muted); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+    .nav-back {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s;
+    }
+
     .nav-back:hover { color: var(--white); }
+
+    .nav-back svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .nav-brand {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
 
     .nav-brand img {
       height: 80px;
       width: 80px;
       object-fit: contain;
       mix-blend-mode: screen;
+      filter: brightness(1.1) contrast(1.1);
+    }
+
+    .nav-right {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      text-transform: uppercase;
     }
 
     .page {
@@ -72,9 +105,13 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
+      align-items: start;
     }
 
-    .gallery { position: sticky; top: 100px; }
+    .gallery {
+      position: sticky;
+      top: 100px;
+    }
 
     .main-image-wrap {
       position: relative;
@@ -83,11 +120,24 @@
       aspect-ratio: 3/4;
     }
 
+    .main-image-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
     .main-image {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.6s ease;
+      display: block;
+      transition: transform 0.6s ease, opacity 0.3s ease;
+    }
+
+    .main-image:hover {
+      transform: scale(1.03);
     }
 
     .thumbnails {
@@ -97,16 +147,143 @@
       margin-top: 8px;
     }
 
-    .thumb { cursor: pointer; border: 1px solid transparent; }
-    .thumb.active { border-color: var(--gold); }
+    .thumb {
+      aspect-ratio: 1;
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: border-color 0.3s;
+      background: var(--grey);
+    }
 
-    .info { padding-top: 10px; }
+    .thumb.active {
+      border-color: var(--gold);
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease, opacity 0.3s;
+      opacity: 0.6;
+    }
+
+    .thumb.active img,
+    .thumb:hover img {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .info {
+      padding-top: 10px;
+    }
+
+    .product-label {
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
 
     .product-name {
       font-family: 'Cormorant Garamond', serif;
       font-size: 72px;
       font-weight: 300;
       line-height: 0.9;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      color: var(--white);
+    }
+
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .product-desc {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      letter-spacing: 0.02em;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 36px;
+    }
+
+    .currency {
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+    }
+
+    .price-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .size-section {
+      margin-bottom: 36px;
+    }
+
+    .size-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .size-guide {
+      color: var(--gold);
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .size-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .size-btn {
+      background: transparent;
+      border: 1px solid var(--mid-grey);
+      color: var(--text-muted);
+      padding: 10px 18px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      min-width: 52px;
+      text-align: center;
+    }
+
+    .size-btn:hover {
+      border-color: var(--white);
+      color: var(--white);
+    }
+
+    .size-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--black);
+      font-weight: 600;
     }
 
     .checkout-btn {
@@ -115,62 +292,231 @@
       background: var(--gold);
       color: var(--black);
       border: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.25em;
       text-transform: uppercase;
       cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .checkout-btn:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    .checkout-btn:active {
+      transform: translateY(0);
+    }
+
+    .checkout-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--black);
+    }
+
+    .order-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      letter-spacing: 0.05em;
+      line-height: 1.6;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(6px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+    }
+
+    .shake { animation: shake 0.4s ease; }
+
+    .size-error {
+      font-size: 11px;
+      color: #e05c5c;
+      letter-spacing: 0.05em;
+      margin-top: 10px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .size-error.visible { opacity: 1; }
+
+    .features {
+      margin-top: 40px;
+      border-top: 1px solid #1e1e1e;
+      padding-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .feature-icon {
+      width: 16px;
+      height: 16px;
+      stroke: var(--gold);
+      fill: none;
+      stroke-width: 1.5;
+      flex-shrink: 0;
+    }
+
+    .gallery { animation: fadeUp 0.7s ease both; }
+    .info { animation: fadeUp 0.7s 0.15s ease both; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 18px 20px; }
+      .nav-right { display: none; }
+
+      .page {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 32px 20px 80px;
+      }
+
+      .gallery { position: static; }
+
+      .product-name { font-size: 52px; }
+      .price-value { font-size: 38px; }
     }
   </style>
 </head>
 
 <body>
 
+  <!-- NAV -->
   <nav>
-    <a href="index.html" class="nav-back">← Back</a>
-    <a href="index.html" class="nav-brand">
-      <img src="data:image/jpeg;base64,/9j/..." alt="Crown & Cross"> <!-- Your logo base64 is here -->
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Back
     </a>
+    <a href="index.html" class="nav-brand">
+      <img src="assets/images/logo.png" alt="Crown & Cross" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+      <span style="display:none; font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:600; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase;">Crown &amp; Cross</span>
+    </a>
+    <span class="nav-right"></span>
   </nav>
 
+  <!-- MAIN -->
   <div class="page">
 
-    <!-- GALLERY - UPDATED -->
+    <!-- GALLERY -->
     <div class="gallery">
       <div class="main-image-wrap">
-        <img id="mainImg" src="assets/images/holy-front.jpg" alt="Holy Shirt" class="main-image"/>
+        <img
+          id="mainImg"
+          src="assets/images/holy-back-1.jpg"
+          alt="Holy Shirt"
+          class="main-image"
+        />
       </div>
       <div class="thumbnails">
         <div class="thumb active" onclick="changeImage(0, this)">
-          <img src="assets/images/holy-front.jpg" alt="Front View">
+          <img src="assets/images/holy-back-1.jpg" alt="Back View 1">
         </div>
         <div class="thumb" onclick="changeImage(1, this)">
-          <img src="assets/images/holy-back-1.jpg" alt="Back View">
+          <img src="assets/images/holy-back-2.jpg" alt="Back View 2">
         </div>
         <div class="thumb" onclick="changeImage(2, this)">
           <img src="assets/images/holy-front-2.jpg" alt="Front View 2">
         </div>
         <div class="thumb" onclick="changeImage(3, this)">
-          <img src="assets/images/holy-back-2.jpg" alt="Back View 2">
+          <img src="assets/images/holy-front.jpg" alt="Front View">
         </div>
       </div>
     </div>
 
-    <!-- INFO SECTION (unchanged) -->
+    <!-- INFO -->
     <div class="info">
-      <p class="product-label">Crown & Cross — SS25</p>
+      <p class="product-label">Crown &amp; Cross — SS25</p>
       <h1 class="product-name">Holy Merch</h1>
-      <!-- ... rest of your info, price, size selector, etc. stays the same ... -->
-      <!-- I kept it short here for readability, but you can keep your original info section -->
+      <div class="divider"></div>
+
+      <p class="product-desc">
+        Holy Merch is more than clothing—it's a statement. Each shirt blends bold design with deep meaning, inspired by faith and culture. Crafted for comfort and impact, Holy Merch lets you wear your values proudly while standing out with minimalist, powerful style.
+      </p>
+
+      <div class="price-row">
+        <span class="currency">GHC</span>
+        <span class="price-value">150</span>
+      </div>
+
+      <!-- SIZE -->
+      <div class="size-section">
+        <div class="size-label">
+          <span>Select Size</span>
+        </div>
+        <div class="size-grid" id="sizeGrid">
+          <button class="size-btn" onclick="selectSize(this)">S</button>
+          <button class="size-btn" onclick="selectSize(this)">M</button>
+          <button class="size-btn" onclick="selectSize(this)">L</button>
+          <button class="size-btn" onclick="selectSize(this)">XL</button>
+          <button class="size-btn" onclick="selectSize(this)">XXL</button>
+          <button class="size-btn" onclick="selectSize(this)">XXXL</button>
+        </div>
+        <p class="size-error" id="sizeError">Please select a size before ordering.</p>
+      </div>
+
+      <!-- CHECKOUT -->
+      <button class="checkout-btn" onclick="goToWhatsApp()">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.979-1.418A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.522 2 11.999 2zm.001 18.077a8.054 8.054 0 01-4.122-1.128l-.295-.177-3.068.874.875-3.007-.192-.307A8.077 8.077 0 013.923 12c0-4.451 3.626-8.077 8.077-8.077S20.077 7.549 20.077 12c0 4.452-3.626 8.077-8.077 8.077z"/>
+        </svg>
+        Order on WhatsApp
+      </button>
+
+      <p class="order-note">
+        You'll be redirected to WhatsApp to confirm your order.<br>We'll get back to you with delivery details.
+      </p>
+
+      <!-- FEATURES -->
+      <div class="features">
+        <div class="feature">
+          <svg class="feature-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Made with purpose
+        </div>
+        <div class="feature">
+          <svg class="feature-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Orders processed within 24 hrs
+        </div>
+        <div class="feature">
+          <svg class="feature-icon" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          Nationwide delivery available
+        </div>
+      </div>
     </div>
 
   </div>
 
   <script>
     const images = [
-      'assets/images/holy-front.jpg',
       'assets/images/holy-back-1.jpg',
+      'assets/images/holy-back-2.jpg',
       'assets/images/holy-front-2.jpg',
-      'assets/images/holy-back-2.jpg'
+      'assets/images/holy-front.jpg'
     ];
 
     let selectedSize = null;
@@ -186,20 +532,32 @@
       thumbEl.classList.add('active');
     }
 
-    // Your existing size and WhatsApp functions remain the same
     function selectSize(btn) {
       document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       selectedSize = btn.innerText;
+      document.getElementById('sizeError').classList.remove('visible');
     }
 
     function goToWhatsApp() {
       if (!selectedSize) {
-        alert("Please select a size before ordering.");
+        const grid = document.getElementById('sizeGrid');
+        const err = document.getElementById('sizeError');
+        err.classList.add('visible');
+        grid.classList.add('shake');
+        setTimeout(() => grid.classList.remove('shake'), 400);
         return;
       }
+
       const phone = '233203919210';
-      const message = encodeURIComponent(`Hi Crown & Cross!\n\nI'd like to order Holy Merch Tee\nSize: ${selectedSize}\nPrice: GHC 150`);
+      const message = encodeURIComponent(
+        `Hi Crown & Cross! 👋\n\nI'd like to order:\n\n` +
+        `• Product: Holy Merch Tee\n` +
+        `• Size: ${selectedSize}\n` +
+        `• Price: GHC 150\n\n` +
+        `Please confirm availability and delivery details. Thank you!`
+      );
+
       window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
     }
   </script>
