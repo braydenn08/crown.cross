@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — Crown & Cross</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #080808;
+      --white: #f5f0e8;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --gold-dim: rgba(201,168,76,0.15);
+      --grey: #1a1a1a;
+      --mid-grey: #2e2e2e;
+      --text-muted: #888;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.45;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 48px;
+      border-bottom: 1px solid #1e1e1e;
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(14px);
+      z-index: 100;
+    }
+
+    .nav-back {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s;
+    }
+    .nav-back:hover { color: var(--white); }
+    .nav-back svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    .nav-logo img {
+      height: 70px;
+      width: 70px;
+      object-fit: contain;
+      mix-blend-mode: screen;
+      filter: brightness(1.2);
+    }
+
+    .nav-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* ── SLIDESHOW WRAPPER ── */
+    .slides-container {
+      position: fixed;
+      inset: 0;
+      top: 90px; /* below nav */
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 80px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* decorative vertical gold line left */
+    .slide::before {
+      content: '';
+      position: absolute;
+      left: 48px;
+      top: 15%;
+      bottom: 15%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+      opacity: 0.4;
+    }
+
+    /* ── SLIDE INNER CONTENT ── */
+    .slide-inner {
+      max-width: 780px;
+      width: 100%;
+      text-align: center;
+      transform: translateY(20px);
+      transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.9s;
+      opacity: 0;
+    }
+
+    .slide.active .slide-inner {
+      transform: translateY(0);
+      opacity: 1;
+      transition-delay: 0.15s;
+    }
+
+    .slide-tag {
+      font-size: 9px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .slide-tag::before,
+    .slide-tag::after {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+
+    .slide-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+
+    .slide-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(54px, 8vw, 90px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 0.92;
+      color: var(--white);
+      margin-bottom: 36px;
+    }
+
+    .slide-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .divider-gold {
+      width: 44px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 36px;
+    }
+
+    .slide-body {
+      font-size: 14px;
+      line-height: 1.9;
+      color: #a09080;
+      font-weight: 300;
+      letter-spacing: 0.03em;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .slide-body strong {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    /* Aims list */
+    .aims-list {
+      list-style: none;
+      text-align: left;
+      max-width: 520px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .aims-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #a09080;
+      font-weight: 300;
+      letter-spacing: 0.03em;
+    }
+
+    .aims-list li::before {
+      content: '✦';
+      color: var(--gold);
+      font-size: 9px;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    /* ── NAVIGATION CONTROLS ── */
+    .nav-controls {
+      position: fixed;
+      bottom: 48px;
+      left: 0; right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      z-index: 100;
+    }
+
+    .nav-arrow {
+      background: transparent;
+      border: 1px solid var(--mid-grey);
+      color: var(--text-muted);
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s;
+    }
+
+    .nav-arrow:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .nav-arrow:disabled {
+      opacity: 0.2;
+      cursor: default;
+    }
+
+    .nav-arrow svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    /* dot indicators */
+    .nav-dots {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 5px;
+      height: 5px;
+      background: var(--mid-grey);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .dot.active {
+      background: var(--gold);
+      width: 20px;
+      border-radius: 3px;
+    }
+
+    /* ── CORNER DECO ── */
+    .corner {
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      z-index: 50;
+      opacity: 0.25;
+    }
+    .corner.tl { top: 100px; left: 24px; border-top: 1px solid var(--gold); border-left: 1px solid var(--gold); }
+    .corner.tr { top: 100px; right: 24px; border-top: 1px solid var(--gold); border-right: 1px solid var(--gold); }
+    .corner.bl { bottom: 100px; left: 24px; border-bottom: 1px solid var(--gold); border-left: 1px solid var(--gold); }
+    .corner.br { bottom: 100px; right: 24px; border-bottom: 1px solid var(--gold); border-right: 1px solid var(--gold); }
+
+    /* ── SLIDE BG NUMBERS ── */
+    .bg-num {
+      position: absolute;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 320px;
+      font-weight: 600;
+      color: rgba(201,168,76,0.03);
+      line-height: 1;
+      right: -20px;
+      bottom: -40px;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+
+    .slide-inner { position: relative; z-index: 1; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-label { display: none; }
+      .slide { padding: 30px 24px; }
+      .slide::before { display: none; }
+      .corner { display: none; }
+      .nav-controls { bottom: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Back
+    </a>
+    <div class="nav-logo">
+      <img src="data:image/jpeg;base64,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" alt="Crown & Cross Logo">
+    </div>
+    <span class="nav-label">Our Story</span>
+  </nav>
+
+  <!-- CORNER DECORATIONS -->
+  <div class="corner tl"></div>
+  <div class="corner tr"></div>
+  <div class="corner bl"></div>
+  <div class="corner br"></div>
+
+  <!-- SLIDES -->
+  <div class="slides-container">
+
+    <!-- SLIDE 1: FOUNDERS -->
+    <div class="slide active" id="slide-0">
+      <div class="bg-num">01</div>
+      <div class="slide-inner">
+        <div class="slide-tag">Crown &amp; Cross</div>
+        <div class="slide-number">01 / 04</div>
+        <h2 class="slide-title">Our<br><em>Founders</em></h2>
+        <div class="divider-gold"></div>
+        <p class="slide-body">
+          Crown &amp; Cross was founded in <strong>2025</strong> by <strong>Brayden Robert</strong>, <strong>Nhyria Odame</strong> and <strong>Eric</strong> with a vision to combine faith and fashion. Inspired by a desire to spread the message of Christ through modern streetwear, the brand was created to help believers express their faith confidently through what they wear.
+        </p>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: MISSION -->
+    <div class="slide" id="slide-1">
+      <div class="bg-num">02</div>
+      <div class="slide-inner">
+        <div class="slide-tag">Crown &amp; Cross</div>
+        <div class="slide-number">02 / 04</div>
+        <h2 class="slide-title">Our<br><em>Mission</em></h2>
+        <div class="divider-gold"></div>
+        <p class="slide-body">
+          To create <strong>high-quality, faith-inspired clothing</strong> that encourages people to represent Christ boldly, spark meaningful conversations, and wear their faith in style.
+        </p>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: VISION -->
+    <div class="slide" id="slide-2">
+      <div class="bg-num">03</div>
+      <div class="slide-inner">
+        <div class="slide-tag">Crown &amp; Cross</div>
+        <div class="slide-number">03 / 04</div>
+        <h2 class="slide-title">Our<br><em>Vision</em></h2>
+        <div class="divider-gold"></div>
+        <p class="slide-body">
+          To become a <strong>leading Christian streetwear brand</strong> that impacts lives globally by using fashion as a platform to share hope, faith, and purpose.
+        </p>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: AIMS -->
+    <div class="slide" id="slide-3">
+      <div class="bg-num">04</div>
+      <div class="slide-inner">
+        <div class="slide-tag">Crown &amp; Cross</div>
+        <div class="slide-number">04 / 04</div>
+        <h2 class="slide-title">Our<br><em>Aims</em></h2>
+        <div class="divider-gold"></div>
+        <ul class="aims-list">
+          <li>Create stylish clothing that reflects Christian values.</li>
+          <li>Inspire young people to live boldly for Christ.</li>
+          <li>Build a community united by faith and creativity.</li>
+          <li>Use fashion as a tool for evangelism and positive influence.</li>
+          <li>Maintain excellence in design, quality, and customer experience.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="nav-controls">
+    <button class="nav-arrow" id="prevBtn" onclick="changeSlide(-1)" disabled>
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="nav-dots" id="dots">
+      <div class="dot active" onclick="goTo(0)"></div>
+      <div class="dot" onclick="goTo(1)"></div>
+      <div class="dot" onclick="goTo(2)"></div>
+      <div class="dot" onclick="goTo(3)"></div>
+    </div>
+    <button class="nav-arrow" id="nextBtn" onclick="changeSlide(1)">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+
+  <script>
+    let current = 0;
+    const total = 4;
+
+    function goTo(index) {
+      document.getElementById('slide-' + current).classList.remove('active');
+      document.querySelectorAll('.dot')[current].classList.remove('active');
+
+      current = index;
+
+      document.getElementById('slide-' + current).classList.add('active');
+      document.querySelectorAll('.dot')[current].classList.add('active');
+
+      document.getElementById('prevBtn').disabled = current === 0;
+      document.getElementById('nextBtn').disabled = current === total - 1;
+    }
+
+    function changeSlide(dir) {
+      const next = current + dir;
+      if (next >= 0 && next < total) goTo(next);
+    }
+
+    // keyboard nav
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+    });
+
+    // swipe support
+    let touchStartX = 0;
+    document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+    document.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1);
+    });
+  </script>
+</body>
+</html>
